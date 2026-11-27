@@ -32,6 +32,10 @@ class DailyTests(unittest.TestCase):
                 clock.now.return_value = now
                 collect.main()
                 collect.main()
+                build.build(data, data / "site")
+                html = (data / "site/index.html").read_text()
+                self.assertIn('href="https://github.com/org/example"', html)
+                self.assertIn("20 most-starred", html)
                 self.assertEqual(observe.call_count, 1)
                 self.assertFalse(list((data / "editions").glob("*.json")))
                 clock.now.return_value = now + timedelta(days=1)

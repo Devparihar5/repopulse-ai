@@ -78,6 +78,11 @@ def rank(rows, previous):
     return [repo for _, repo, _ in eligible[:20]]
 
 
+def most_starred(rows):
+    keys = sorted(rows, key=lambda key: (-rows[key]["stars"], key))
+    return [rows[key] for key in keys[:20]]
+
+
 def save(path, value):
     tmp = path.with_suffix(".tmp")
     tmp.write_text(json.dumps(value, ensure_ascii=False, indent=2) + "\n")
@@ -89,6 +94,14 @@ def main():
     day = now.date()
     state = json.loads((ROOT / "state.json").read_text())
     if state.get("date") == day.isoformat():
+        if "most_starred" not in state:
+            rows = observe(sorted(state["stars"]))
+            if not rows:
+                raise RuntimeError("Unable to recover baseline repository metadata")
+            for key, repo in rows.items():
+                repo["stars"] = state["stars"][key]
+            state["most_starred"] = most_starred(rows)
+            save(ROOT / "state.json", state)
         return
     rows = observe(sorted(set(state.get("stars", {})) | discover(day)))
     if not rows:
@@ -99,7 +112,7 @@ def main():
         path = ROOT / "editions" / f"{day}.json"
         if not path.exists():
             save(path, edition)
-    save(ROOT / "state.json", dict(date=str(day), observed=now.isoformat(),
+    save(ROOT / "state.json", dict(date=str(day), observed=now.isoformat(), most_starred=most_starred(rows),
                                   stars={key: value["stars"] for key, value in rows.items()}))
 
 
