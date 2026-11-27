@@ -8,6 +8,9 @@ from pathlib import Path
 PROJECT = Path(__file__).resolve().parents[1]
 
 
+THEME_SCRIPT = (PROJECT / "web/theme.js").read_text()
+
+
 def read(path):
     return json.loads(path.read_text())
 
@@ -39,11 +42,12 @@ def render(edition, dates, prefix):
     chart = ('<figure><figcaption>Top five by stars</figcaption><ol class="bars">' +
              "".join(bars) + '</ol></figure>') if bars else ""
     content = '<ol class="leaderboard">' + "".join(cards) + '</ol>' if cards else '<p>No repositories in this edition.</p>'
-    return f"""<!doctype html><html lang="en"><head><meta charset="utf-8">
+    return f"""<!doctype html><html lang="en" data-theme="dark"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script>{THEME_SCRIPT}</script>
 <title>{heading} | RepoPulse AI</title><link rel="stylesheet" href="{prefix}style.css"></head>
 <body><header><div class="wrap mast"><a class="brand" href="{prefix}"><em aria-hidden="true">∿</em> RepoPulse <b>AI</b></a>
-<nav aria-label="Main"><a href="{prefix}">Latest</a><a href="#archive">Archive</a></nav></div></header>
+<nav aria-label="Main"><a href="{prefix}">Latest</a><a href="#archive">Archive</a><button id="theme-switch" type="button" hidden>Light theme</button></nav></div></header>
 <main class="wrap"><section class="intro"><div><small class="edition">Daily edition · {heading}</small>
 <h1>Top new <em>AI</em><br>repositories.</h1>
 <p>The most-starred AI projects created in the last 30 days.</p></div>{chart}</section>
