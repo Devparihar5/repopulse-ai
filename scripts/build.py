@@ -8,6 +8,7 @@ from pathlib import Path
 PROJECT = Path(__file__).resolve().parents[1]
 
 
+PAGE_STYLES = (PROJECT / "web/style.css").read_text()
 THEME_SCRIPT = (PROJECT / "web/theme.js").read_text()
 
 
@@ -45,7 +46,7 @@ def render(edition, dates, prefix):
     return f"""<!doctype html><html lang="en" data-theme="dark"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script>{THEME_SCRIPT}</script>
-<title>{heading} | RepoPulse AI</title><link rel="stylesheet" href="{prefix}style.css"></head>
+<title>{heading} | RepoPulse AI</title><style>{PAGE_STYLES}</style></head>
 <body><header><div class="wrap mast"><a class="brand" href="{prefix}"><em aria-hidden="true">∿</em> RepoPulse <b>AI</b></a>
 <nav aria-label="Main"><a href="{prefix}">Latest</a><a href="#archive">Archive</a><button id="theme-switch" type="button" hidden>Light theme</button></nav></div></header>
 <main class="wrap"><section class="intro"><div><small class="edition">Daily edition · {heading}</small>
