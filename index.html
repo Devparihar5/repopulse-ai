@@ -1,8 +1,36 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8">
+<!doctype html><html lang="en" data-theme="dark"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script>(() => {
+  const key = "repopulse-ai-theme";
+  const root = document.documentElement;
+  try {
+    if (localStorage.getItem(key) === "light") root.dataset.theme = "light";
+  } catch {
+    // Storage can be unavailable in private browsing.
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const button = document.getElementById("theme-switch");
+    const updateLabel = () => {
+      button.textContent = root.dataset.theme === "light" ? "Dark theme" : "Light theme";
+    };
+    updateLabel();
+    button.hidden = false;
+    button.addEventListener("click", () => {
+      root.dataset.theme = root.dataset.theme === "light" ? "dark" : "light";
+      updateLabel();
+      try {
+        localStorage.setItem(key, root.dataset.theme);
+      } catch {
+        // The selected theme still applies for this page.
+      }
+    });
+  });
+})();
+</script>
 <title>27 November 2026 | RepoPulse AI</title><link rel="stylesheet" href="./style.css"></head>
 <body><header><div class="wrap mast"><a class="brand" href="./"><em aria-hidden="true">∿</em> RepoPulse <b>AI</b></a>
-<nav aria-label="Main"><a href="./">Latest</a><a href="#archive">Archive</a></nav></div></header>
+<nav aria-label="Main"><a href="./">Latest</a><a href="#archive">Archive</a><button id="theme-switch" type="button" hidden>Light theme</button></nav></div></header>
 <main class="wrap"><section class="intro"><div><small class="edition">Daily edition · 27 November 2026</small>
 <h1>Top new <em>AI</em><br>repositories.</h1>
 <p>The most-starred AI projects created in the last 30 days.</p></div><figure><figcaption>Top five by stars</figcaption><ol class="bars"><li><span>Mika</span><i style="--width:100.00%"></i><b>10,113</b></li><li><span>SoduWork</span><i style="--width:83.93%"></i><b>8,488</b></li><li><span>agent-autoloop</span><i style="--width:66.17%"></i><b>6,692</b></li><li><span>exact</span><i style="--width:51.51%"></i><b>5,209</b></li><li><span>fast-anything</span><i style="--width:43.07%"></i><b>4,356</b></li></ol></figure></section>
