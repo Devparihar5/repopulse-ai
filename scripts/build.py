@@ -16,25 +16,19 @@ def stamp(value):
     return datetime.fromisoformat(value).strftime("%d %b %Y, %H:%M UTC")
 
 
-def render(edition, dates, state, prefix):
+def render(edition, dates, prefix):
     options = "".join(f'<li><a href="{prefix}editions/{d}/">{d}</a></li>' for d in dates)
     archive = options or "<li>Past editions will appear here.</li>"
     cards = []
-    repos = edition["repos"] if edition else state.get("most_starred", [])
+    repos = edition["repos"] if edition else []
     for i, repo in enumerate(repos, 1):
-        metric = f"+{repo['gain']:,}" if edition else f"{repo['stars']:,}"
-        label = "net stars" if edition else "total stars"
         cards.append(f"""<li class="row"><span class="rank">{i:02}</span><div>
 <h2><a href="{escape(repo['url'], quote=True)}">{escape(repo['name'])}</a></h2>
-<p>{escape(repo['description'])}</p><small>{escape(repo['category'])} · {repo['stars']:,} total stars</small>
-</div><strong>{metric}<small>{label}</small></strong></li>""")
-    if edition:
-        detail = f"{stamp(edition['start'])} — {stamp(edition['end'])} · {edition['tracked']:,} repositories tracked"
-        status = "No tracked repositories gained stars during this window."
-    else:
-        detail = (f"Baseline recorded {stamp(state['observed'])} · {len(state['stars']):,} repositories tracked"
-                  if state else "Awaiting the first daily observation")
-        status = "The first ranking appears after two consecutive daily observations."
+<p>{escape(repo['description'])}</p><small>{escape(repo['category'])} · Created <time datetime="{repo['created']}">{repo['created']}</time></small>
+</div><strong>{repo['stars']:,}<small>stars</small></strong></li>""")
+    detail = (f"Created {edition['start']} through {edition['date']} · Updated {stamp(edition['observed'])}"
+              if edition else "Awaiting the first edition")
+    status = "No repositories in this edition."
     heading = f"Edition · {edition['date']}" if edition else "Most starred"
     content = '<ol>' + "".join(cards) + '</ol>' if cards else f'<p class="empty">{status}</p>'
     return f"""<!doctype html><html lang="en"><head><meta charset="utf-8">
@@ -42,8 +36,8 @@ def render(edition, dates, state, prefix):
 <title>{heading} | RepoPulse AI</title><link rel="stylesheet" href="{prefix}style.css"></head>
 <body><header><a class="brand" href="{prefix}">RepoPulse <b>AI</b></a>
 <nav><a href="{prefix}">Latest</a><a href="#archive">Archive</a></nav></header>
-<main><section class="intro"><small>{heading}</small><h1>{'Trending AI repositories' if edition else 'Top AI repositories'}</h1>
-<p>{'The top 20 tracked projects by daily net star gain.' if edition else 'The 20 most-starred tracked projects. Daily gains appear after the next consecutive observation.'}</p></section>
+<main><section class="intro"><small>{heading}</small><h1>Top new AI repositories</h1>
+<p>The 20 most-starred projects across our AI topics, created in the last 30 days.</p></section>
 <p class="window">{detail}</p>{content}
 <section id="archive"><h2>Edition archive</h2><ul>{archive}</ul></section>
 <footer><a href="https://github.com/Devparihar5/repopulse-ai#ranking">How the ranking works ↗</a></footer>
@@ -53,15 +47,14 @@ def render(edition, dates, state, prefix):
 def build(data, output):
     output.mkdir(parents=True, exist_ok=True)
     shutil.copy(PROJECT / "web/style.css", output)
-    state = read(data / "state.json")
     editions = sorted((data / "editions").glob("*.json"), reverse=True)
     dates = [p.stem for p in editions]
     current = read(editions[0]) if editions else None
-    (output / "index.html").write_text(render(current, dates, state, "./"))
+    (output / "index.html").write_text(render(current, dates, "./"))
     for path in editions:
         folder = output / "editions" / path.stem
         folder.mkdir(parents=True, exist_ok=True)
-        (folder / "index.html").write_text(render(read(path), dates, state, "../../"))
+        (folder / "index.html").write_text(render(read(path), dates, "../../"))
 
 
 if __name__ == "__main__":

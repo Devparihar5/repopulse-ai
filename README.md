@@ -1,12 +1,10 @@
 # RepoPulse AI
 
-A daily leaderboard of AI repositories gaining stars on GitHub. Browse the latest ranking and permanent dated editions.
+A daily leaderboard of newly created, highly starred AI repositories on GitHub. Browse the latest ranking and permanent dated editions.
 
 ## Ranking
 
-At 02:37 UTC (08:07 IST) the scheduled workflow searches six AI topics. For each it takes up to 50 repositories by stars overall and up to 50 created in the last 30 days. It combines those candidates with yesterday’s watchlist by stable repository ID, refreshes counts, and excludes forks, archived projects, and repositories without a matching topic among their first 30 topics. Coverage is limited to the tracked pool.
-
-Projects with two consecutive UTC-day observations qualify. Daily gain equals current stars minus previous stars. Only positive gains appear. Ties favor greater percentage growth (zero baseline first), then repository ID. Editions contain at most 20 entries. Run times may vary. The first collection establishes a baseline. After a missed day the next collection establishes a fresh baseline.
+At 02:37 UTC (08:07 IST), GitHub Actions searches for public, non-fork, unarchived projects with at least one star created during the latest 30 UTC calendar dates, including the edition date. For each configured AI topic it requests the 100 highest-starred matches, merges overlapping results by repository ID, and lists up to 20 by total stars. Ties among retrieved projects use repository ID. Each dated edition freezes its counts and links.
 
 ## Run locally
 
