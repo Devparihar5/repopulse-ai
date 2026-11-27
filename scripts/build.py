@@ -21,24 +21,33 @@ def render(edition, dates, prefix):
     archive = options or "<li>Past editions will appear here.</li>"
     cards = []
     repos = edition["repos"] if edition else []
+    bars = []
     for i, repo in enumerate(repos, 1):
-        cards.append(f"""<li class="row"><span class="rank">{i:02}</span><div>
-<h2><a href="{escape(repo['url'], quote=True)}">{escape(repo['name'])}</a></h2>
-<p>{escape(repo['description'])}</p><small>{escape(repo['category'])} · Created <time datetime="{repo['created']}">{repo['created']}</time></small>
-</div><strong>{repo['stars']:,}<small>stars</small></strong></li>""")
-    detail = (f"Created {edition['start']} through {edition['date']} · Updated {stamp(edition['observed'])}"
-              if edition else "Awaiting the first edition")
-    status = "No repositories in this edition."
-    heading = f"Edition · {edition['date']}" if edition else "Most starred"
-    content = '<ol>' + "".join(cards) + '</ol>' if cards else f'<p class="empty">{status}</p>'
+        owner, _, name = repo["name"].partition("/")
+        url = escape(repo["url"], quote=True)
+        if i <= 5:
+            width = 100 * repo["stars"] / max(1, repos[0]["stars"])
+            bars.append(f'<li><span>{escape(name)}</span><i style="--width:{width:.2f}%"></i><b>{repo["stars"]:,}</b></li>')
+        created = datetime.fromisoformat(repo["created"]).strftime("%d %b %Y")
+        cards.append(f"""<li class="row"><span class="rank">{i:02}</span><div class="project">
+<small>{escape(owner)}</small><h2><a href="{url}">{escape(name)} <span aria-hidden="true">↗</span></a></h2>
+<p>{escape(repo['description'])}</p><div class="meta"><b>{escape(repo['category'])}</b>
+<span>Created <time datetime="{repo['created']}">{created}</time></span></div></div>
+<strong><span aria-hidden="true">☆</span> {repo['stars']:,}<small>GitHub stars</small></strong></li>""")
+    heading = datetime.fromisoformat(edition["date"]).strftime("%d %B %Y") if edition else "First edition"
+    detail = f"Updated {stamp(edition['observed'])}" if edition else "Awaiting the first edition"
+    chart = ('<figure><figcaption>Top five by stars</figcaption><ol class="bars">' +
+             "".join(bars) + '</ol></figure>') if bars else ""
+    content = '<ol class="leaderboard">' + "".join(cards) + '</ol>' if cards else '<p>No repositories in this edition.</p>'
     return f"""<!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{heading} | RepoPulse AI</title><link rel="stylesheet" href="{prefix}style.css"></head>
-<body><header><a class="brand" href="{prefix}">RepoPulse <b>AI</b></a>
-<nav><a href="{prefix}">Latest</a><a href="#archive">Archive</a></nav></header>
-<main><section class="intro"><small>{heading}</small><h1>Top new AI repositories</h1>
-<p>The 20 most-starred projects across our AI topics, created in the last 30 days.</p></section>
-<p class="window">{detail}</p>{content}
+<body><header><div class="wrap mast"><a class="brand" href="{prefix}"><em aria-hidden="true">∿</em> RepoPulse <b>AI</b></a>
+<nav aria-label="Main"><a href="{prefix}">Latest</a><a href="#archive">Archive</a></nav></div></header>
+<main class="wrap"><section class="intro"><div><small class="edition">Daily edition · {heading}</small>
+<h1>Top new <em>AI</em><br>repositories.</h1>
+<p>The most-starred AI projects created in the last 30 days.</p></div>{chart}</section>
+<section aria-label="Repository leaderboard"><div class="sectionhead"><h2>Leaderboard <small>{len(repos)}</small></h2><span>{detail}</span></div>{content}</section>
 <section id="archive"><h2>Edition archive</h2><ul>{archive}</ul></section>
 <footer><a href="https://github.com/Devparihar5/repopulse-ai#ranking">How the ranking works ↗</a></footer>
 </main></body></html>"""
