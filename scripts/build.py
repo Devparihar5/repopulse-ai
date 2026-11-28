@@ -40,6 +40,9 @@ def render(edition, dates, prefix):
 <strong><span aria-hidden="true">☆</span> {repo['stars']:,}<small>GitHub stars</small></strong></li>""")
     heading = datetime.fromisoformat(edition["date"]).strftime("%d %B %Y") if edition else "First edition"
     detail = f"Updated {stamp(edition['observed'])}" if edition else "Awaiting the first edition"
+    summary = "The most-starred AI projects created in the last 30 days."
+    if edition and edition.get("fresh_picks"):
+        summary = "Fresh picks from the last 30 days, ranked by stars. Projects from the previous edition sit this one out."
     chart = ('<figure><figcaption>Top five by stars</figcaption><ol class="bars">' +
              "".join(bars) + '</ol></figure>') if bars else ""
     content = '<ol class="leaderboard">' + "".join(cards) + '</ol>' if cards else '<p>No repositories in this edition.</p>'
@@ -51,7 +54,7 @@ def render(edition, dates, prefix):
 <nav aria-label="Main"><a href="{prefix}">Latest</a><a href="#archive">Archive</a><button id="theme-switch" type="button" hidden>Light theme</button></nav></div></header>
 <main class="wrap"><section class="intro"><div><small class="edition">Daily edition · {heading}</small>
 <h1>Top new <em>AI</em><br>repositories.</h1>
-<p>The most-starred AI projects created in the last 30 days.</p></div>{chart}</section>
+<p>{summary}</p></div>{chart}</section>
 <section aria-label="Repository leaderboard"><div class="sectionhead"><h2>Leaderboard <small>{len(repos)}</small></h2><span>{detail}</span></div>{content}</section>
 <section id="archive"><h2>Edition archive</h2><ul>{archive}</ul></section>
 <footer><a href="https://github.com/Devparihar5/repopulse-ai#ranking">How the ranking works ↗</a></footer>

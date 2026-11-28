@@ -35,7 +35,9 @@ def api(path, body=None):
             time.sleep(delay)
 
 
-def discover(day):
+def discover(day, previous=()):
+    seen_ids = {repo.get("id") for repo in previous}
+    seen_names = {repo["name"].casefold() for repo in previous}
     start = day - timedelta(days=29)
     repos = {}
     for topic in TOPICS:
@@ -45,10 +47,12 @@ def discover(day):
         if result["incomplete_results"]:
             raise RuntimeError(f"Incomplete GitHub search for {topic}")
         for item in result["items"]:
+            if item["id"] in seen_ids or item["full_name"].casefold() in seen_names:
+                continue
             created = item["created_at"][:10]
             if start.isoformat() <= created <= day.isoformat():
                 repos.setdefault(item["id"], dict(
-                    name=item["full_name"], url=item["html_url"], description=item["description"] or "",
+                    id=item["id"], name=item["full_name"], url=item["html_url"], description=item["description"] or "",
                     created=created, stars=item["stargazers_count"], category=topic,
                 ))
     keys = sorted(repos, key=lambda key: (-repos[key]["stars"], key))
@@ -61,10 +65,12 @@ def main():
     path = ROOT / "editions" / f"{day}.json"
     if path.exists():
         return
-    repos = discover(day)
+    earlier = sorted(p for p in path.parent.glob("*.json") if p.stem < str(day))
+    previous = json.loads(earlier[-1].read_text())["repos"] if earlier else []
+    repos = discover(day, previous)
     if not repos:
         raise RuntimeError("No recent repositories found")
-    edition = dict(date=str(day), observed=now.isoformat(),
+    edition = dict(fresh_picks=True, date=str(day), observed=now.isoformat(),
                    start=str(day - timedelta(days=29)), repos=repos)
     tmp = path.with_suffix(".tmp")
     tmp.write_text(json.dumps(edition, ensure_ascii=False, indent=2) + "\n")

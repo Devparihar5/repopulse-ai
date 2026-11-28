@@ -21,3 +21,12 @@ class RecentRankingTests(unittest.TestCase):
         html = build.render(edition, [edition["date"]], "./")
         self.assertEqual(html.count('<h2><a href="https://github.com/ai/model-'), 20)
         self.assertIn('datetime="2026-10-29"', html)
+
+    def test_previous_edition_excluded_before_ranking(self):
+        items = [dict(id=i, full_name=f"ai/model-{i}", html_url=f"https://github.com/ai/model-{i}",
+                      description="", created_at="2026-11-27", stargazers_count=i)
+                 for i in range(1, 25)]
+        previous = [{"name": "AI/MODEL-24"}, {"name": "ai/old-name", "id": 23}]
+        with patch.object(collect, "api", return_value={"items": items, "incomplete_results": False}):
+            repos = collect.discover(date(2026, 11, 28), previous)
+        self.assertEqual([repo["id"] for repo in repos], list(range(22, 2, -1)))

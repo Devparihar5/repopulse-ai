@@ -4,7 +4,7 @@ A daily leaderboard of newly created, highly starred AI repositories on GitHub. 
 
 ## Ranking
 
-At 02:37 UTC (08:07 IST), GitHub Actions searches for public, non-fork, unarchived projects with at least one star created during the latest 30 UTC calendar dates, including the edition date. For each configured AI topic it requests the 100 highest-starred matches, merges overlapping results by repository ID, and lists up to 20 by total stars. Ties among retrieved projects use repository ID. Each dated edition freezes its counts and links.
+At 02:37 UTC (08:07 IST), GitHub Actions searches for public, non-fork, unarchived projects with at least one star created during the latest 30 UTC calendar dates, including the edition date. For each configured AI topic it requests the 100 highest-starred matches, merges overlapping results by repository ID, excludes projects featured in the previous edition, and lists up to 20 by total stars. Ties among retrieved projects use repository ID. Backup schedules run at 11:07 and 15:07 IST. Once the edition exists, later runs reuse it. Each dated edition freezes its counts and links.
 
 ## Run locally
 

@@ -3,7 +3,7 @@ on:
   push:
     branches: [main]
   schedule:
-    - cron: '37 2 * * *'
+    - cron: '37 2,5,9 * * *'
   workflow_dispatch:
 concurrency:
   group: daily-pages
