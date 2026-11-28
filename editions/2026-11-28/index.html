@@ -1,0 +1,142 @@
+<!doctype html><html lang="en" data-theme="dark"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>(() => {
+  const key = "repopulse-ai-theme";
+  const root = document.documentElement;
+  try {
+    if (localStorage.getItem(key) === "light") root.dataset.theme = "light";
+  } catch {
+    // Storage can be unavailable in private browsing.
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const button = document.getElementById("theme-switch");
+    const updateLabel = () => {
+      button.textContent = root.dataset.theme === "light" ? "Dark theme" : "Light theme";
+    };
+    updateLabel();
+    button.hidden = false;
+    button.addEventListener("click", () => {
+      root.dataset.theme = root.dataset.theme === "light" ? "dark" : "light";
+      updateLabel();
+      try {
+        localStorage.setItem(key, root.dataset.theme);
+      } catch {
+        // The selected theme still applies for this page.
+      }
+    });
+  });
+})();
+</script>
+<title>28 November 2026 | RepoPulse AI</title><style>:root{color-scheme:dark;--ink:#ecf2e8;--muted:#b0bfb3;--line:#34473e;--paper:#111c18;--accent:#ffb18e;--surface:#26392f;--tag:#c6ddc8;font:16px/1.5 "DM Sans",system-ui,sans-serif;color:var(--ink);background:var(--paper)}
+:root[data-theme="light"]{color-scheme:light;--ink:#1b302c;--muted:#53665e;--line:#d9dfd4;--paper:#f8f8f1;--accent:#ad442e;--surface:#e3ebdf;--tag:#365548}
+*{box-sizing:border-box}body,figure,ol,ul,h1,h2,p{margin:0}ol,ul{padding:0;list-style:none}.wrap{width:min(1120px,91%);margin:auto}
+a{color:inherit;text-underline-offset:.2em}a:focus-visible{outline:3px solid #bf614b;outline-offset:4px}
+header{border-bottom:1px solid var(--line)}.mast,.brand,nav,.meta,.sectionhead,.sectionhead h2{display:flex;align-items:center}.mast,.sectionhead{justify-content:space-between}
+.mast{min-height:72px}.brand{gap:.4rem;font-size:1.23rem;font-weight:780;letter-spacing:-.055em;text-decoration:none}.brand b{font-size:.7em;color:var(--accent)}
+.brand em{display:grid;place-items:center;width:32px;height:32px;margin-right:.15rem;border-radius:9px;color:#f4bd8e;background:#25443b;font:700 30px/1 Georgia,serif}
+nav{gap:1.4rem}nav a{font-size:.88rem;text-decoration:none}nav a:hover,h2 a:hover{text-decoration:underline}
+.intro{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:8%;align-items:center;padding:clamp(2.2rem,6vw,5rem) 0}
+.edition,figcaption,.rank,.sectionhead>span,.row small,.meta,.bars b{font-family:"IBM Plex Mono",ui-monospace,monospace}
+.edition,figcaption{text-transform:uppercase;letter-spacing:.11em;font-size:.72rem;font-weight:650}.edition{color:var(--accent)}h1{font:500 clamp(3rem,6.5vw,5.7rem)/.96 "Instrument Serif",Georgia,serif;letter-spacing:-.058em;margin:.8rem 0 1rem}h1 em{color:var(--accent)}.intro p,.row p{color:var(--muted)}
+figure{background:#193832;color:#f6f5e9;padding:clamp(1.3rem,3vw,2.3rem);border-radius:1.3rem}figcaption{color:#f2cca5;margin-bottom:1.1rem}
+.bars{display:grid;gap:.75rem}.bars li{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) 5ch;align-items:center;gap:.75rem;font-size:.8rem}.bars li span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.bars b{text-align:right}.bars i{height:7px;background:#355149;border-radius:8px}.bars i:before{content:"";display:block;width:var(--width);height:100%;background:#ebb88e;border-radius:inherit}
+.sectionhead{gap:.7rem;flex-wrap:wrap;border-bottom:2px solid var(--ink);padding-bottom:1rem}.sectionhead h2,#archive h2{font:500 2rem/1.15 Georgia,serif;letter-spacing:-.045em}.sectionhead h2 small{font:600 .78rem/1.8 system-ui;background:var(--surface);margin-left:.6rem;padding:0 .55rem;border-radius:20px}.sectionhead>span,.meta{font-size:.75rem;color:var(--muted)}
+.row{display:grid;grid-template-columns:2.6rem minmax(0,1fr) auto;gap:1.2rem;align-items:start;padding:1.45rem 0;border-bottom:1px solid var(--line)}.rank{color:var(--muted);font-size:1rem;padding-top:.2rem}.row:first-child .rank{color:var(--accent)}.project{overflow-wrap:anywhere}.project>small{color:var(--muted)}.row h2{font-size:1.4rem;letter-spacing:-.035em;line-height:1.3}.row h2 a{text-decoration:none}.row h2 a:hover{text-decoration:underline}.row h2 span{font-size:.75em;color:var(--accent)}.row p{margin:.4rem 0 .65rem;max-width:75ch}.meta{gap:.7rem;flex-wrap:wrap}.meta b{background:var(--surface);color:var(--tag);border-radius:5px;padding:.12rem .45rem;font-weight:500}.row strong{text-align:right;font-size:1.25rem;font-variant-numeric:tabular-nums}.row strong span{color:var(--accent)}.row strong small{display:block;font-size:.68rem;font-weight:400;color:var(--muted)}
+#archive{padding:2.5rem 0}#archive ul{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:1rem}#archive a{display:block;background:var(--surface);padding:.45rem .85rem;border-radius:6px}footer{padding:1rem 0 2rem;border-top:1px solid var(--line);font-size:.85rem}
+@media(max-width:720px){.intro{grid-template-columns:1fr;gap:1.6rem}.mast{min-height:60px}.row{grid-template-columns:1.6rem minmax(0,1fr) auto;gap:.5rem}.row strong{font-size:1rem}.sectionhead{align-items:start}.bars li{grid-template-columns:minmax(0,1fr) minmax(0,1.4fr) 5ch}.meta{gap:.4rem}}
+
+#theme-switch{background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:2rem;padding:.45rem .8rem;font:600 .82rem/1.4 system-ui;cursor:pointer}
+#theme-switch:hover{border-color:var(--accent)}
+#theme-switch:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+@media(max-width:470px){.mast{flex-wrap:wrap;gap:.5rem;padding:.65rem 0}nav{gap:.65rem}}
+</style></head>
+<body><header><div class="wrap mast"><a class="brand" href="../../"><em aria-hidden="true">∿</em> RepoPulse <b>AI</b></a>
+<nav aria-label="Main"><a href="../../">Latest</a><a href="#archive">Archive</a><button id="theme-switch" type="button" hidden>Light theme</button></nav></div></header>
+<main class="wrap"><section class="intro"><div><small class="edition">Daily edition · 28 November 2026</small>
+<h1>Top new <em>AI</em><br>repositories.</h1>
+<p>Fresh picks from the last 30 days, ranked by stars. Projects from the previous edition sit this one out.</p></div><figure><figcaption>Top five by stars</figcaption><ol class="bars"><li><span>100x-engineer-skill</span><i style="--width:100.00%"></i><b>1,296</b></li><li><span>ste80-humanizer</span><i style="--width:90.35%"></i><b>1,171</b></li><li><span>smolmaxxing</span><i style="--width:89.20%"></i><b>1,156</b></li><li><span>solo-to-team-skills</span><i style="--width:87.35%"></i><b>1,132</b></li><li><span>waifu2x-image-upscaler-windows</span><i style="--width:83.33%"></i><b>1,080</b></li></ol></figure></section>
+<section aria-label="Repository leaderboard"><div class="sectionhead"><h2>Leaderboard <small>20</small></h2><span>Updated 28 Nov 2026, 10:24 UTC</span></div><ol class="leaderboard"><li class="row"><span class="rank">01</span><div class="project">
+<small>DeadInternetStudios</small><h2><a href="https://github.com/DeadInternetStudios/100x-engineer-skill">100x-engineer-skill <span aria-hidden="true">↗</span></a></h2>
+<p>100x is a skill by a former Cursor engineer that turns prompts into formally verified, production-ready code</p><div class="meta"><b>ai-agents</b>
+<span>Created <time datetime="2026-11-23">23 Nov 2026</time></span></div></div>
+<strong><span aria-hidden="true">☆</span> 1,296<small>GitHub stars</small></strong></li><li class="row"><span class="rank">02</span><div class="project">
+<small>Dodaios</small><h2><a href="https://github.com/Dodaios/ste80-humanizer">ste80-humanizer <span aria-hidden="true">↗</span></a></h2>
+<p>STE80 Humanizer: agent skill that removes AI tells and rewrites text 80% of the way to ASD-STE100 (Simplified Technical English), the method Andrej Karpathy shared.</p><div class="meta"><b>llm</b>
+<span>Created <time datetime="2026-11-09">09 Nov 2026</time></span></div></div>
+<strong><span aria-hidden="true">☆</span> 1,171<small>GitHub stars</small></strong></li><li class="row"><span class="rank">03</span><div class="project">
+<small>hyperionaidev</small><h2><a href="https://github.com/hyperionaidev/smolmaxxing">smolmaxxing <span aria-hidden="true">↗</span></a></h2>
+<p>maxxing the ability to run different LLMs on the smallest devices possible</p><div class="meta"><b>llm</b>
+<span>Created <time datetime="2026-11-04">04 Nov 2026</time></span></div></div>
+<strong><span aria-hidden="true">☆</span> 1,156<small>GitHub stars</small></strong></li><li class="row"><span class="rank">04</span><div class="project">
+<small>dabingfy-dot</small><h2><a href="https://github.com/dabingfy-dot/solo-to-team-skills">solo-to-team-skills <span aria-hidden="true">↗</span></a></h2>
+<p>Human-led MAS toolkit: 16 roles, 6 group templates, four platform bundles, evidence-based review and handoff. 一人成队：一个人统筹多智能体协作。</p><div class="meta"><b>ai-agents</b>
+<span>Created <time datetime="2026-11-07">07 Nov 2026</time></span></div></div>
+<strong><span aria-hidden="true">☆</span> 1,132<small>GitHub stars</small></strong></li><li class="row"><span class="rank">05</span><div class="project">
+<small>Red2076-arch</small><h2><a href="https://github.com/Red2076-arch/waifu2x-image-upscaler-windows">waifu2x-image-upscaler-windows <span aria-hidden="true">↗</span></a></h2>
+<p>Free AI image upscaler and photo denoiser for Windows powered by Vulkan GPU acceleration and ncnn neural networks.</p><div class="meta"><b>machine-learning</b>
+<span>Created <time datetime="2026-11-27">27 Nov 2026</time></span></div></div>
+<strong><span aria-hidden="true">☆</span> 1,080<small>GitHub stars</small></strong></li><li class="row"><span class="rank">06</span><div class="project">
+<small>mankidev</small><h2><a href="https://github.com/mankidev/antialgorithm">antialgorithm <span aria-hidden="true">↗</span></a></h2>
+<p>Agent skill that steers the model away from its first, most average pick in creative work: names, ideas, logo, posters, UI.</p><div class="meta"><b>llm</b>
+<span>Created <time datetime="2026-11-14">14 Nov 2026</time></span></div></div>
+<strong><span aria-hidden="true">☆</span> 929<small>GitHub stars</small></strong></li><li class="row"><span class="rank">07</span><div class="project">
+<small>sous-labs</small><h2><a href="https://github.com/sous-labs/songe">songe <span aria-hidden="true">↗</span></a></h2>
+<p>A training engine for your local model, using your idle compute</p><div class="meta"><b>llm</b>
+<span>Created <time datetime="2026-11-20">20 Nov 2026</time></span></div></div>
+<strong><span aria-hidden="true">☆</span> 929<small>GitHub stars</small></strong></li><li class="row"><span class="rank">08</span><div class="project">
+<small>boringmarketer</small><h2><a href="https://github.com/boringmarketer/boring-marketing-skills">boring-marketing-skills <span aria-hidden="true">↗</span></a></h2>
+<p>32 free marketing skills for your AI agent: research, positioning, copy, pages, SEO, AI search, ads, email and content, plus a deep local-business pack. MIT.</p><div class="meta"><b>ai-agents</b>
+<span>Created <time datetime="2026-11-16">16 Nov 2026</time></span></div></div>
+<strong><span aria-hidden="true">☆</span> 887<small>GitHub stars</small></strong></li><li class="row"><span class="rank">09</span><div class="project">
+<small>erkamyaman</small><h2><a href="https://github.com/erkamyaman/safe-anything">safe-anything <span aria-hidden="true">↗</span></a></h2>
+<p>Find the holes before someone else does. A fast, 100% Rust vulnerability scanner: XSS, SQL injection, leaked secrets, dependency CVEs and AI agent setups.</p><div class="meta"><b>ai-agents</b>
+<span>Created <time datetime="2026-11-22">22 Nov 2026</time></span></div></div>
+<strong><span aria-hidden="true">☆</span> 843<small>GitHub stars</small></strong></li><li class="row"><span class="rank">10</span><div class="project">
+<small>TIGER-AI-Lab</small><h2><a href="https://github.com/TIGER-AI-Lab/WebsiteBench">WebsiteBench <span aria-hidden="true">↗</span></a></h2>
+<p>Can AI agents rebuild websites through browser exploration?</p><div class="meta"><b>llm</b>
+<span>Created <time datetime="2026-11-04">04 Nov 2026</time></span></div></div>
+<strong><span aria-hidden="true">☆</span> 822<small>GitHub stars</small></strong></li><li class="row"><span class="rank">11</span><div class="project">
+<small>ai-timon</small><h2><a href="https://github.com/ai-timon/timon">timon <span aria-hidden="true">↗</span></a></h2>
+<p>Timon is an Agentic Workstation who let you orchestrates all your AI agents in the same place</p><div class="meta"><b>ai-agents</b>
+<span>Created <time datetime="2026-11-06">06 Nov 2026</time></span></div></div>
+<strong><span aria-hidden="true">☆</span> 799<small>GitHub stars</small></strong></li><li class="row"><span class="rank">12</span><div class="project">
+<small>SAOS-3624</small><h2><a href="https://github.com/SAOS-3624/dsh-see-now">dsh-see-now <span aria-hidden="true">↗</span></a></h2>
+<p>让 AI 实时看见你的屏幕：按变化量筛选帧、多帧拼进一张图，静止画面几乎不花 token</p><div class="meta"><b>llm</b>
+<span>Created <time datetime="2026-11-01">01 Nov 2026</time></span></div></div>
+<strong><span aria-hidden="true">☆</span> 790<small>GitHub stars</small></strong></li><li class="row"><span class="rank">13</span><div class="project">
+<small>JimLiu</small><h2><a href="https://github.com/JimLiu/open-artifact">open-artifact <span aria-hidden="true">↗</span></a></h2>
+<p>Open, agent- and model-agnostic artifacts, all saved locally as plain files — edit, comment on, and export slides, UI designs, design systems, whiteboards, sheets, dashboards, docs, and motion.</p><div class="meta"><b>ai-agents</b>
+<span>Created <time datetime="2026-11-17">17 Nov 2026</time></span></div></div>
+<strong><span aria-hidden="true">☆</span> 718<small>GitHub stars</small></strong></li><li class="row"><span class="rank">14</span><div class="project">
+<small>w01fb0ss</small><h2><a href="https://github.com/w01fb0ss/PiBot">PiBot <span aria-hidden="true">↗</span></a></h2>
+<p>Open-source, local-first AI agent team for your desktop: multi-agent group chats, computer use, browser, MCP, routines and approvals. macOS, Windows, Linux + Android. Built on pi.</p><div class="meta"><b>llm</b>
+<span>Created <time datetime="2026-11-21">21 Nov 2026</time></span></div></div>
+<strong><span aria-hidden="true">☆</span> 689<small>GitHub stars</small></strong></li><li class="row"><span class="rank">15</span><div class="project">
+<small>aa1143</small><h2><a href="https://github.com/aa1143/NamiAgent">NamiAgent <span aria-hidden="true">↗</span></a></h2>
+<p>零基础入门 AI Agent 的基础教程。不只是教程，也是一个能在本地跑起来的 Agent：读写文件、执行命令、MCP、长期记忆，自带网页端看清每一步。从 100 行最小循环开始，一课加一个能力，最后拆解 Claude Code、Codex 等主流 Agent</p><div class="meta"><b>llm</b>
+<span>Created <time datetime="2026-10-30">30 Oct 2026</time></span></div></div>
+<strong><span aria-hidden="true">☆</span> 638<small>GitHub stars</small></strong></li><li class="row"><span class="rank">16</span><div class="project">
+<small>Developing-Gamer</small><h2><a href="https://github.com/Developing-Gamer/agent-sim">agent-sim <span aria-hidden="true">↗</span></a></h2>
+<p>iOS simulators for AI agents, on Linux. The agent layer for x86Sim.</p><div class="meta"><b>ai-agents</b>
+<span>Created <time datetime="2026-11-21">21 Nov 2026</time></span></div></div>
+<strong><span aria-hidden="true">☆</span> 631<small>GitHub stars</small></strong></li><li class="row"><span class="rank">17</span><div class="project">
+<small>molly554</small><h2><a href="https://github.com/molly554/whiteboard-ai-tutor">whiteboard-ai-tutor <span aria-hidden="true">↗</span></a></h2>
+<p>Open-source whiteboard AI tutor with animated lessons and interactive playback. Compare Claude, Gemini &amp; DeepSeek across 288 generation runs and 64 blind-reviewed boards.</p><div class="meta"><b>llm</b>
+<span>Created <time datetime="2026-11-11">11 Nov 2026</time></span></div></div>
+<strong><span aria-hidden="true">☆</span> 579<small>GitHub stars</small></strong></li><li class="row"><span class="rank">18</span><div class="project">
+<small>berkantay</small><h2><a href="https://github.com/berkantay/gpucanvas">gpucanvas <span aria-hidden="true">↗</span></a></h2>
+<p>Put thousands of live DOM nodes on an infinite canvas: the GPU draws them, an editor selects, moves and resizes them, shaders and transitions run on them, and an AI agent can read them and point at them.</p><div class="meta"><b>ai-agents</b>
+<span>Created <time datetime="2026-11-12">12 Nov 2026</time></span></div></div>
+<strong><span aria-hidden="true">☆</span> 565<small>GitHub stars</small></strong></li><li class="row"><span class="rank">19</span><div class="project">
+<small>Pluviobyte</small><h2><a href="https://github.com/Pluviobyte/saas-growth-agents">saas-growth-agents <span aria-hidden="true">↗</span></a></h2>
+<p>Hand your SaaS growth chores to an agent: new-term radar, keyword-to-site discovery, competitor backlinks, directory submissions, plus a social analysis pack with a Douyin comments skill. Works with Grok Bot, Muse, Dot, Hermes, OpenClaw, Claude Code and Codex.</p><div class="meta"><b>ai-agents</b>
+<span>Created <time datetime="2026-10-30">30 Oct 2026</time></span></div></div>
+<strong><span aria-hidden="true">☆</span> 563<small>GitHub stars</small></strong></li><li class="row"><span class="rank">20</span><div class="project">
+<small>fendouai</small><h2><a href="https://github.com/fendouai/ViralForge">ViralForge <span aria-hidden="true">↗</span></a></h2>
+<p>Agent-native viral video studio: deconstruct scripts, replicate structures, export editable projects and costed variants. Website: https://wearai.net/ai-video-generator</p><div class="meta"><b>ai-agents</b>
+<span>Created <time datetime="2026-11-11">11 Nov 2026</time></span></div></div>
+<strong><span aria-hidden="true">☆</span> 559<small>GitHub stars</small></strong></li></ol></section>
+<section id="archive"><h2>Edition archive</h2><ul><li><a href="../../editions/2026-11-28/">2026-11-28</a></li><li><a href="../../editions/2026-11-27/">2026-11-27</a></li></ul></section>
+<footer><a href="https://github.com/Devparihar5/repopulse-ai#ranking">How the ranking works ↗</a></footer>
+</main></body></html>
